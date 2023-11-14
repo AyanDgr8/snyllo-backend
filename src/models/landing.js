@@ -11,6 +11,6 @@ const landingSchema = mongoose.Schema({
 });
 
 
-const UserDetails = mongoose.model("SignInUser", landingSchema)
+const UserDetails = mongoose.model("UserDetails", landingSchema)
 
 module.exports = UserDetails;     
