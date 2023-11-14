@@ -6,12 +6,11 @@ const cors = require('cors');
 const dotenv = require('dotenv').config();
 const UserDetails = require('./src/models/landing');
 
-
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect(process.env.mongoDB)
+mongoose.connect(process.env.mongoDB, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log('MongoDB connected successfully');
     })
@@ -21,10 +20,16 @@ mongoose.connect(process.env.mongoDB)
 
 app.post('/user-details', async (req, res) => {
     try {
+        console.log('Received request:', req.body);
+
         const user = new UserDetails(req.body);
         const savedUser = await user.save();
+        
+        console.log('User details saved successfully:', savedUser);
+        
         res.json(savedUser);
     } catch (error) {
+        console.error('Error saving user details:', error);
         res.status(500).json({ error: error.message });
     }
 });
