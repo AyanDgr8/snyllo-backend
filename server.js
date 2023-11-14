@@ -1,10 +1,11 @@
-// src/server.js
+// server.js
 
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const dotenv = require('dotenv').config();
-const UserDetails = require('./models/landing');
+const UserDetails = require('./src/models/landing');
+
 
 const app = express();
 app.use(cors());
